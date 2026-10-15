@@ -5,6 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Speak Easy with Bharathi</title>
 <style>
-body{font-family:Arial;background:#f5f3ff;padding:20px}
-.card{background:white;padding:20px;border-radius:20px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;margin-bottom:20px}
-button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:
+body{font-family:Arial;background:#f5f3ff;padding:15px;margin:0}
+.card{background:white;padding:20px;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center;margin-bottom:20px}
+button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:12px;font-size:16px;cursor:pointer}
+.opt{background:#ede9fe;text-align:left}
+.next{background:#7c6ee6;color:white;font-weight:bold}
+.kelunga{background:#4ecdc4;color:white}
+.pesunga{background:#ff6b6b;color:white}
+</style>
+</head>
+<body>
+<div class="card">
+<h2 id="tamil">Loading...</h2>
+<h3 id="english" style="color:#7c6ee6"></h3>
+<div id="options"></div>
+<p id="result" style="font-weight:bold"></p>
+<p>Score: <span id="score">0</span> | Left: <span id="left">0</span></p>
+<button class="next" onclick="nextQ()">Next Question ➡️</button>
+</div>
+<div class="card" style="border:2px dashed #7c6ee6">
+<h3>🗣️ Voice Practice</h3>
+<h2 id="voiceWord" style="color:#7c6ee6"></h2>
+<button class="kelunga" onclick="speakWord()">🔊 Kelunga</button>
+<button class="pesunga" onclick="startVoice()">🎤 Pesunga & Check</button>
+<p id="voiceRes"></p>
+</div>
+<script>
+let quiz=[
+{ta:"English enna?",en:"I know English",opts:["I know English","I don't know English","I love English"],a:0},
+{ta:"Nandri",en:"Thank you",opts:["Thank you","Sorry","Please"],a:0},
+{ta:"Magizhchi",en:"Happy",opts:["Happy","Sad","Angry"],a:0},
+{ta:"Kaalai Vanakkam",en:"Good Morning",opts:["Good Morning","Good Night","Good Evening"],a:0},
+{ta:"Naan Varuven",en:"I will come",opts:["I will come","I will go","I will eat"],a:0},
+{ta:"Saptiya?",en:"Did you eat?",opts:["Did you eat?","Did you sleep?","Did you go?"],a:0},
+{ta:"Thanni Kudu",en:"Give water",opts:["Give water","Give food","Give money"],a:0},
+{ta:"Nalla Irukken",en:"I am fine",opts:["I am fine","I am sick","I am tired"],a:0},
+{ta:"Un Peyar Enna?",en:"What is your name?",opts:["What is your name?","Where are you?","How are you?"],a:0},
+{ta:"Enakku Theriyum",en:"I know",opts:["I know","I don't know","I think"],a:0},
+{ta:"Veedu",en:"House",opts:["House","School","Office"],a:0},
+{ta:"Puthagam",en:"Book",opts:["Book","Pen","Paper"],a:0},
+{ta:"Thalaivali",en:"Headache",opts:["Headache","Stomach pain","Fever"],a:0},
+{ta:"Anbu",en:"Love",opts:["Love","Hate","Anger"],a:0},
+{ta:"Vellai",en:"White",opts:["White","Black","Red"],a:0},
+{ta:"Sivappu",en:"Red",opts:["Red","Blue","Green"],a:0},
+{ta:"Manidhan",en:"Human",opts:["Human","Animal","Bird"],a:0},
+{ta:"Payanam",en:"Journey",opts:["Journey","Holiday","Work"],a:0},
+{ta:"Uyir",en:"Life",opts:["Life","Death","Soul"],a:0},
+{ta:"Kanavu",en:"Dream",opts:["Dream","Reality","Sleep"],a:0}
+];
+let used=[];
+let current=0;
+let score=0;
+function getNextIndex(){
+if(used.length>=quiz.length){alert("Super! "+quiz.length+" words mudinjiduchu!");used=[];}
+let r;
+do{r=Math.floor(Math.random()*quiz.length);}while(used.includes(r));
+used.push(r);
+return r;
+}
+function loadQ(){
+current=getNextIndex();
+document.getElementById('tamil').innerText=quiz[current].ta+" English enna?";
+document.getElementById('voiceWord').innerText=quiz[current].en;
+document.getElementById('left').innerText=(quiz.length-used.length);
+let optDiv=document.getElementById('options');
+optDiv.innerHTML="";
+quiz[current].opts.forEach((o,i)=>{
+let btn=document.createElement('button');
+btn.className='opt';
+btn.innerText=String.fromCharCode(65+i)+") "+o;
+btn.onclick=()=>checkAns(i);
+optDiv.appendChild(btn);
+});
+document.getElementById('result').innerText="";
+document.getElementById('voiceRes').innerText="";
+}
+function checkAns(ans){
+let r=document.getElementById('result');
+if(ans===quiz[current].a){r.innerText="✅ Super! Correct!";r.style.color="green";score++;document.getElementById('score').innerText=score;speakWord();}else{r.innerText="❌ Thappu! Correct: "+quiz[current].opts[quiz[current].a];r.style.color="red";}
+}
+function nextQ(){loadQ();}
+function speakWord(){let utter=new SpeechSynthesisUtterance(quiz[current].en);utter.lang='en-US';utter.rate=0.8;speechSynthesis.speak(utter);}
+function startVoice(){
+let vRes=document.getElementById('voiceRes');
+if(!('webkitSpeechRecognition' in window)){vRes.innerText="Mic support illa";return;}
+let rec=new webkitSpeechRecognition();rec.lang='en-US';rec.start();
+vRes.innerText="🎧 Kettukittu irukken...";
+rec.onresult=function(e){let said=e.results[0][0].transcript.toLowerCase();let target=quiz[current].en.toLowerCase();if(said.includes(target.split(' ')[0])){vRes.innerText="🔥 Excellent! Correct!";}else{vRes.innerText="🗣️ Sonna: '"+e.results[0][0].transcript+"'";}
+}
+}
+loadQ();
+</script>
+</body>
+</html>
