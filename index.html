@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speak Easy with Bharathi</title>
+<title>Speak Easy with Bharathi - 100 Words</title>
 <style>
 body{font-family:Arial;background:#f5f3ff;padding:15px;margin:0}
 .card{background:white;padding:20px;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center;margin-bottom:20px}
@@ -17,7 +17,6 @@ button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:12px;font-
 <body>
 <div class="card">
 <h2 id="tamil">Loading...</h2>
-<h3 id="english" style="color:#7c6ee6"></h3>
 <div id="options"></div>
 <p id="result" style="font-weight:bold"></p>
 <p>Score: <span id="score">0</span> | Left: <span id="left">0</span></p>
@@ -32,68 +31,115 @@ button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:12px;font-
 </div>
 <script>
 let quiz=[
-{ta:"English enna?",en:"I know English",opts:["I know English","I don't know English","I love English"],a:0},
-{ta:"Nandri",en:"Thank you",opts:["Thank you","Sorry","Please"],a:0},
-{ta:"Magizhchi",en:"Happy",opts:["Happy","Sad","Angry"],a:0},
-{ta:"Kaalai Vanakkam",en:"Good Morning",opts:["Good Morning","Good Night","Good Evening"],a:0},
-{ta:"Naan Varuven",en:"I will come",opts:["I will come","I will go","I will eat"],a:0},
-{ta:"Saptiya?",en:"Did you eat?",opts:["Did you eat?","Did you sleep?","Did you go?"],a:0},
-{ta:"Thanni Kudu",en:"Give water",opts:["Give water","Give food","Give money"],a:0},
-{ta:"Nalla Irukken",en:"I am fine",opts:["I am fine","I am sick","I am tired"],a:0},
-{ta:"Un Peyar Enna?",en:"What is your name?",opts:["What is your name?","Where are you?","How are you?"],a:0},
-{ta:"Enakku Theriyum",en:"I know",opts:["I know","I don't know","I think"],a:0},
-{ta:"Veedu",en:"House",opts:["House","School","Office"],a:0},
-{ta:"Puthagam",en:"Book",opts:["Book","Pen","Paper"],a:0},
-{ta:"Thalaivali",en:"Headache",opts:["Headache","Stomach pain","Fever"],a:0},
-{ta:"Anbu",en:"Love",opts:["Love","Hate","Anger"],a:0},
-{ta:"Vellai",en:"White",opts:["White","Black","Red"],a:0},
-{ta:"Sivappu",en:"Red",opts:["Red","Blue","Green"],a:0},
-{ta:"Manidhan",en:"Human",opts:["Human","Animal","Bird"],a:0},
-{ta:"Payanam",en:"Journey",opts:["Journey","Holiday","Work"],a:0},
-{ta:"Uyir",en:"Life",opts:["Life","Death","Soul"],a:0},
-{ta:"Kanavu",en:"Dream",opts:["Dream","Reality","Sleep"],a:0}
+{ta:"English enna?",en:"I know English",opts:["I know English","I don't know","Not sure"],a:0},
+{ta:"Nandri",en:"Thank you",opts:["Thank you","I don't know","Not sure"],a:0},
+{ta:"Magizhchi",en:"Happy",opts:["Happy","I don't know","Not sure"],a:0},
+{ta:"Kaalai Vanakkam",en:"Good Morning",opts:["Good Morning","I don't know","Not sure"],a:0},
+{ta:"Naan Varuven",en:"I will come",opts:["I will come","I don't know","Not sure"],a:0},
+{ta:"Saptiya?",en:"Did you eat?",opts:["Did you eat?","I don't know","Not sure"],a:0},
+{ta:"Thanni Kudu",en:"Give water",opts:["Give water","I don't know","Not sure"],a:0},
+{ta:"Nalla Irukken",en:"I am fine",opts:["I am fine","I don't know","Not sure"],a:0},
+{ta:"Un Peyar Enna?",en:"What is your name?",opts:["What is your name?","I don't know","Not sure"],a:0},
+{ta:"Enakku Theriyum",en:"I know",opts:["I know","I don't know","Not sure"],a:0},
+{ta:"Veedu",en:"House",opts:["House","I don't know","Not sure"],a:0},
+{ta:"Puthagam",en:"Book",opts:["Book","I don't know","Not sure"],a:0},
+{ta:"Thalaivali",en:"Headache",opts:["Headache","I don't know","Not sure"],a:0},
+{ta:"Anbu",en:"Love",opts:["Love","I don't know","Not sure"],a:0},
+{ta:"Vellai",en:"White",opts:["White","I don't know","Not sure"],a:0},
+{ta:"Sivappu",en:"Red",opts:["Red","I don't know","Not sure"],a:0},
+{ta:"Manidhan",en:"Human",opts:["Human","I don't know","Not sure"],a:0},
+{ta:"Payanam",en:"Journey",opts:["Journey","I don't know","Not sure"],a:0},
+{ta:"Uyir",en:"Life",opts:["Life","I don't know","Not sure"],a:0},
+{ta:"Kanavu",en:"Dream",opts:["Dream","I don't know","Not sure"],a:0},
+{ta:"Thanneer",en:"Water",opts:["Water","I don't know","Not sure"],a:0},
+{ta:"Saapadu",en:"Food",opts:["Food","I don't know","Not sure"],a:0},
+{ta:"Kudumbam",en:"Family",opts:["Family","I don't know","Not sure"],a:0},
+{ta:"Natpu",en:"Friendship",opts:["Friendship","I don't know","Not sure"],a:0},
+{ta:"Vaanam",en:"Sky",opts:["Sky","I don't know","Not sure"],a:0},
+{ta:"Bhoomi",en:"Earth",opts:["Earth","I don't know","Not sure"],a:0},
+{ta:"Sooriyan",en:"Sun",opts:["Sun","I don't know","Not sure"],a:0},
+{ta:"Nilavu",en:"Moon",opts:["Moon","I don't know","Not sure"],a:0},
+{ta:"Natchathiram",en:"Star",opts:["Star","I don't know","Not sure"],a:0},
+{ta:"Maram",en:"Tree",opts:["Tree","I don't know","Not sure"],a:0},
+{ta:"Poovu",en:"Flower",opts:["Flower","I don't know","Not sure"],a:0},
+{ta:"Kaatru",en:"Wind",opts:["Wind","I don't know","Not sure"],a:0},
+{ta:"Mazhai",en:"Rain",opts:["Rain","I don't know","Not sure"],a:0},
+{ta:"Neruppu",en:"Fire",opts:["Fire","I don't know","Not sure"],a:0},
+{ta:"Paasam",en:"Affection",opts:["Affection","I don't know","Not sure"],a:0},
+{ta:"Kobam",en:"Anger",opts:["Anger","I don't know","Not sure"],a:0},
+{ta:"Amaithi",en:"Peace",opts:["Peace","I don't know","Not sure"],a:0},
+{ta:"Bayam",en:"Fear",opts:["Fear","I don't know","Not sure"],a:0},
+{ta:"Dharyam",en:"Courage",opts:["Courage","I don't know","Not sure"],a:0},
+{ta:"Nambikkai",en:"Hope",opts:["Hope","I don't know","Not sure"],a:0},
+{ta:"Uzhaippu",en:"Hard work",opts:["Hard work","I don't know","Not sure"],a:0},
+{ta:"Vettrimai",en:"Success",opts:["Success","I don't know","Not sure"],a:0},
+{ta:"Tholviyai",en:"Failure",opts:["Failure","I don't know","Not sure"],a:0},
+{ta:"Padippu",en:"Education",opts:["Education","I don't know","Not sure"],a:0},
+{ta:"Arivu",en:"Knowledge",opts:["Knowledge","I don't know","Not sure"],a:0},
+{ta:"Azhagu",en:"Beauty",opts:["Beauty","I don't know","Not sure"],a:0},
+{ta:"Valimai",en:"Strength",opts:["Strength","I don't know","Not sure"],a:0},
+{ta:"Nermai",en:"Honesty",opts:["Honesty","I don't know","Not sure"],a:0},
+{ta:"Udhavigal",en:"Help",opts:["Help","I don't know","Not sure"],a:0},
+{ta:"Mannippu",en:"Sorry",opts:["Sorry","I don't know","Not sure"],a:0},
+{ta:"Vandhanam",en:"Welcome",opts:["Welcome","I don't know","Not sure"],a:0},
+{ta:"Pirivu",en:"Separation",opts:["Separation","I don't know","Not sure"],a:0},
+{ta:"Sandhippu",en:"Meeting",opts:["Meeting","I don't know","Not sure"],a:0},
+{ta:"Sirippu",en:"Smile",opts:["Smile","I don't know","Not sure"],a:0},
+{ta:"Azhugai",en:"Cry",opts:["Cry","I don't know","Not sure"],a:0},
+{ta:"Thookam",en:"Sleep",opts:["Sleep","I don't know","Not sure"],a:0},
+{ta:"Vizhippu",en:"Wake up",opts:["Wake up","I don't know","Not sure"],a:0},
+{ta:"Nadanai",en:"Walk",opts:["Walk","I don't know","Not sure"],a:0},
+{ta:"Ooduthal",en:"Run",opts:["Run","I don't know","Not sure"],a:0},
+{ta:"Pechu",en:"Speech",opts:["Speech","I don't know","Not sure"],a:0},
+{ta:"Kelvi",en:"Question",opts:["Question","I don't know","Not sure"],a:0},
+{ta:"Bathil",en:"Answer",opts:["Answer","I don't know","Not sure"],a:0},
+{ta:"Thodakkam",en:"Beginning",opts:["Beginning","I don't know","Not sure"],a:0},
+{ta:"Mudivu",en:"End",opts:["End","I don't know","Not sure"],a:0},
+{ta:"Pudhu",en:"New",opts:["New","I don't know","Not sure"],a:0},
+{ta:"Pazhaiya",en:"Old",opts:["Old","I don't know","Not sure"],a:0},
+{ta:"Periya",en:"Big",opts:["Big","I don't know","Not sure"],a:0},
+{ta:"Chinna",en:"Small",opts:["Small","I don't know","Not sure"],a:0},
+{ta:"Uyaram",en:"Tall",opts:["Tall","I don't know","Not sure"],a:0},
+{ta:"Kuttai",en:"Short",opts:["Short","I don't know","Not sure"],a:0},
+{ta:"Inbam",en:"Joy",opts:["Joy","I don't know","Not sure"],a:0},
+{ta:"Thunbam",en:"Sorrow",opts:["Sorrow","I don't know","Not sure"],a:0},
+{ta:"Vegam",en:"Fast",opts:["Fast","I don't know","Not sure"],a:0},
+{ta:"Mellam",en:"Slow",opts:["Slow","I don't know","Not sure"],a:0},
+{ta:"Soodu",en:"Hot",opts:["Hot","I don't know","Not sure"],a:0},
+{ta:"Kulir",en:"Cold",opts:["Cold","I don't know","Not sure"],a:0},
+{ta:"Pakal",en:"Day",opts:["Day","I don't know","Not sure"],a:0},
+{ta:"Iravu",en:"Night",opts:["Night","I don't know","Not sure"],a:0},
+{ta:"Kaadhal",en:"Love",opts:["Love","I don't know","Not sure"],a:0},
+{ta:"Marandhu vitten",en:"I forgot",opts:["I forgot","I don't know","Not sure"],a:0},
+{ta:"Nyabagam irukku",en:"I remember",opts:["I remember","I don't know","Not sure"],a:0},
+{ta:"Enakku pidikkum",en:"I like it",opts:["I like it","I don't know","Not sure"],a:0},
+{ta:"Enakku pidikkala",en:"I don't like",opts:["I don't like","I don't know","Not sure"],a:0},
+{ta:"Udaney va",en:"Come immediately",opts:["Come immediately","I don't know","Not sure"],a:0},
+{ta:"Naalai parpom",en:"See you tomorrow",opts:["See you tomorrow","I don't know","Not sure"],a:0},
+{ta:"Sariya?",en:"Is it correct?",opts:["Is it correct?","I don't know","Not sure"],a:0},
+{ta:"Puriyuthu",en:"I understand",opts:["I understand","I don't know","Not sure"],a:0},
+{ta:"Puriyala",en:"I don't understand",opts:["I don't understand","I don't know","Not sure"],a:0},
+{ta:"Enna pannuringa?",en:"What are you doing?",opts:["What are you doing?","I don't know","Not sure"],a:0},
+{ta:"Eppo varuve?",en:"When will you come?",opts:["When will you come?","I don't know","Not sure"],a:0},
+{ta:"Enga pogure?",en:"Where are you going?",opts:["Where are you going?","I don't know","Not sure"],a:0},
+{ta:"Yaar adhu?",en:"Who is that?",opts:["Who is that?","I don't know","Not sure"],a:0},
+{ta:"Idhu enna?",en:"What is this?",opts:["What is this?","I don't know","Not sure"],a:0},
+{ta:"Evvalavu?",en:"How much?",opts:["How much?","I don't know","Not sure"],a:0},
+{ta:"Eppadi iruke?",en:"How are you?",opts:["How are you?","I don't know","Not sure"],a:0},
+{ta:"Nalla irukku",en:"It is good",opts:["It is good","I don't know","Not sure"],a:0},
+{ta:"Ketta irukku",en:"It is bad",opts:["It is bad","I don't know","Not sure"],a:0},
+{ta:"Udane seiyungal",en:"Do it immediately",opts:["Do it immediately","I don't know","Not sure"],a:0},
+{ta:"Konjam poru",en:"Wait a little",opts:["Wait a little","I don't know","Not sure"],a:0},
+{ta:"Ulla va",en:"Come inside",opts:["Come inside","I don't know","Not sure"],a:0},
+{ta:"Veliya po",en:"Go outside",opts:["Go outside","I don't know","Not sure"],a:0}
 ];
-let used=[];
-let current=0;
-let score=0;
-function getNextIndex(){
-if(used.length>=quiz.length){alert("Super! "+quiz.length+" words mudinjiduchu!");used=[];}
-let r;
-do{r=Math.floor(Math.random()*quiz.length);}while(used.includes(r));
-used.push(r);
-return r;
-}
-function loadQ(){
-current=getNextIndex();
-document.getElementById('tamil').innerText=quiz[current].ta+" English enna?";
-document.getElementById('voiceWord').innerText=quiz[current].en;
-document.getElementById('left').innerText=(quiz.length-used.length);
-let optDiv=document.getElementById('options');
-optDiv.innerHTML="";
-quiz[current].opts.forEach((o,i)=>{
-let btn=document.createElement('button');
-btn.className='opt';
-btn.innerText=String.fromCharCode(65+i)+") "+o;
-btn.onclick=()=>checkAns(i);
-optDiv.appendChild(btn);
-});
-document.getElementById('result').innerText="";
-document.getElementById('voiceRes').innerText="";
-}
-function checkAns(ans){
-let r=document.getElementById('result');
-if(ans===quiz[current].a){r.innerText="✅ Super! Correct!";r.style.color="green";score++;document.getElementById('score').innerText=score;speakWord();}else{r.innerText="❌ Thappu! Correct: "+quiz[current].opts[quiz[current].a];r.style.color="red";}
-}
+let used=[];let current=0;let score=0;
+function getNextIndex(){if(used.length>=quiz.length){alert("🎉 Super Bharathi! 100 words mudinjiduchu!");used=[];}let r;do{r=Math.floor(Math.random()*quiz.length);}while(used.includes(r));used.push(r);return r;}
+function loadQ(){current=getNextIndex();document.getElementById('tamil').innerText=quiz[current].ta+" English enna?";document.getElementById('voiceWord').innerText=quiz[current].en;document.getElementById('left').innerText=(quiz.length-used.length);let optDiv=document.getElementById('options');optDiv.innerHTML="";quiz[current].opts.forEach((o,i)=>{let btn=document.createElement('button');btn.className='opt';btn.innerText=String.fromCharCode(65+i)+") "+o;btn.onclick=()=>checkAns(i);optDiv.appendChild(btn);});document.getElementById('result').innerText="";document.getElementById('voiceRes').innerText="";}
+function checkAns(ans){let r=document.getElementById('result');if(ans===quiz[current].a){r.innerText="✅ Super! Correct!";r.style.color="green";score++;document.getElementById('score').innerText=score;speakWord();}else{r.innerText="❌ Thappu! Correct: "+quiz[current].opts[quiz[current].a];r.style.color="red";}}
 function nextQ(){loadQ();}
 function speakWord(){let utter=new SpeechSynthesisUtterance(quiz[current].en);utter.lang='en-US';utter.rate=0.8;speechSynthesis.speak(utter);}
-function startVoice(){
-let vRes=document.getElementById('voiceRes');
-if(!('webkitSpeechRecognition' in window)){vRes.innerText="Mic support illa";return;}
-let rec=new webkitSpeechRecognition();rec.lang='en-US';rec.start();
-vRes.innerText="🎧 Kettukittu irukken...";
-rec.onresult=function(e){let said=e.results[0][0].transcript.toLowerCase();let target=quiz[current].en.toLowerCase();if(said.includes(target.split(' ')[0])){vRes.innerText="🔥 Excellent! Correct!";}else{vRes.innerText="🗣️ Sonna: '"+e.results[0][0].transcript+"'";}
-}
-}
+function startVoice(){let vRes=document.getElementById('voiceRes');if(!('webkitSpeechRecognition' in window)){vRes.innerText="Mic support illa";return;}let rec=new webkitSpeechRecognition();rec.lang='en-US';rec.start();vRes.innerText="🎧 Kettukittu irukken...";rec.onresult=function(e){let said=e.results[0][0].transcript.toLowerCase();let target=quiz[current].en.toLowerCase();if(said.includes(target.split(' ')[0])){vRes.innerText="🔥 Excellent! Correct!";}else{vRes.innerText="🗣️ Sonna: '"+e.results[0][0].transcript+"'";}}}
 loadQ();
 </script>
 </body>
