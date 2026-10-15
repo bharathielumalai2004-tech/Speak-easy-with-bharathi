@@ -1,101 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Speak Easy with Bharathi</title>
 <style>
-body{font-family:Arial,sans-serif; margin:0; background:#f5f0ff;}
-.header{background:#6a5acd; color:white; padding:25px; text-align:center; border-radius:0 0 25px 25px;}
-.card{background:white; border-radius:18px; padding:20px; margin:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-.btn{width:100%; padding:14px; margin:8px 0; border:none; border-radius:12px; font-size:16px; font-weight:bold; cursor:pointer;}
-.quiz-btn{background:#ede9ff;}
-.quiz-btn:active{background:#6a5acd; color:white;}
-.voice-btn{background:#ff6b6b; color:white;}
-.listen-btn{background:#4ecdc4; color:white;}
-.score{font-size:20px; font-weight:bold; color:#6a5acd; text-align:center;}
-</style>
-</head>
-<body>
-
-<div class="header">
-<h1>Speak Easy with Bharathi 🎤</h1>
-<p>Tamil to English - Quiz + Voice Practice</p>
-</div>
-
-<div class="card">
-<p class="score">Score: <span id="score">0</span> / 5</p>
-<h2 id="question" style="text-align:center;">Loading...</h2>
-<button class="btn quiz-btn" id="btnA" onclick="checkAnswer('a')"></button>
-<button class="btn quiz-btn" id="btnB" onclick="checkAnswer('b')"></button>
-<button class="btn quiz-btn" id="btnC" onclick="checkAnswer('c')"></button>
-<p id="result" style="text-align:center; font-weight:bold; font-size:18px; min-height:25px;"></p>
-<button class="btn" style="background:#6a5acd; color:white;" onclick="nextQ()">Next Question ➡️</button>
-</div>
-
-<div class="card" style="text-align:center; border:2px dashed #6a5acd;">
-<h2>🗣️ Voice Practice (Pesu)</h2>
-<p>English word-a solli parunga!</p>
-<h3 id="voiceWord" style="color:#6a5acd; font-size:24px;">Happy</h3>
-<button class="btn listen-btn" onclick="speakWord()">🔊 Kelunga</button>
-<button class="btn voice-btn" onclick="startVoice()">🎤 Pesunga & Check pannu</button>
-<p id="voiceResult" style="font-weight:bold; margin-top:10px;"></p>
-</div>
-
-<script>
-const quiz=[
-{q:"Magizhchi",a:"a",opts:["Happy - Magizhchi","Success - Vetri","Beautiful - Azhagu"],en:"Happy"},
-{q:"Vetri",a:"b",opts:["Happy - Magizhchi","Success - Vetri","Angry - Kobam"],en:"Success"},
-{q:"Azhagana Ponnu",a:"c",opts:["Sad Girl","Angry Boy","Beautiful Girl"],en:"Beautiful Girl"},
-{q:"Enakku English Theriyum",a:"a",opts:["I know English","I don't know English","I love English"],en:"I know English"},
-{q:"Nandri, Meendum Sandhippom",a:"b",opts:["Sorry, bye","Thank you, see you again","Welcome home"],en:"Thank you, see you again"},
-{q:"Indru Mazhai Peyyuma?",a:"a",opts:["Will it rain today?","Is it sunny today?","Is it cold today?"],en:"Will it rain today?"},
-{q:"Naan Ungaludan Pesa Virumbugiren",a:"c",opts:["I hate you","I miss you","I want to talk with you"],en:"I want to talk with you"}
-];
-let current=0; let score=0; let used=[];
-function loadQ(){
-let idx; do{idx=Math.floor(Math.random()*quiz.length);}while(used.includes(idx) && used.length < quiz.length);
-current=idx; if(!used.includes(idx)) used.push(idx); if(used.length>=5) used=[];
-document.getElementById('question').innerText=quiz[current].q + " - English enna?";
-document.getElementById('btnA').innerText="A) "+quiz[current].opts[0];
-document.getElementById('btnB').innerText="B) "+quiz[current].opts[1];
-document.getElementById('btnC').innerText="C) "+quiz[current].opts[2];
-document.getElementById('result').innerText="";
-document.getElementById('voiceWord').innerText=quiz[current].en;
-}
-function checkAnswer(ans){
-let r=document.getElementById('result');
-if(ans===quiz[current].a){
-r.innerText="✅ Super Bharathi! Correct!"; r.style.color="green"; score++;
-document.getElementById('score').innerText=score;
-speakWord();
-}else{r.innerText="❌ Thappu! Correct: "+quiz[current].opts[quiz[current].a.charCodeAt(0)-97]; r.style.color="red";}
-}
-function nextQ(){loadQ();}
-function speakWord(){
-let text=quiz[current].en;
-let utter=new SpeechSynthesisUtterance(text);
-utter.lang='en-US'; utter.rate=0.8;
-speechSynthesis.speak(utter);
-}
-function startVoice(){
-let vRes=document.getElementById('voiceResult');
-if(!('webkitSpeechRecognition' in window)){vRes.innerText="⚠️ Ippo browser support pannala, Chrome la try pannu"; return;}
-let rec=new webkitSpeechRecognition();
-rec.lang='en-US'; rec.start();
-vRes.innerText="🎧 Kettukittu irukken... Pesunga...";
-rec.onresult=function(e){
-let said=e.results[0][0].transcript.toLowerCase();
-let target=quiz[current].en.toLowerCase();
-if(said.includes(target.split(' ')[0]) || target.includes(said)){
-vRes.innerText="🔥 Excellent! Neenga sonnathu: '"+e.results[0][0].transcript+"'"; vRes.style.color="green";
-}else{
-vRes.innerText="🗣️ Neenga sonnathu: '"+e.results[0][0].transcript+"'. Try again!"; vRes.style.color="orange";
-}
-}
-rec.onerror=function(){vRes.innerText="Mic-a allow pannunga!";}
-}
-loadQ();
-</script>
-</body>
-</html>
+body{font-family:Arial;background:#f5f3ff;padding:20px}
+.card{background:white;padding:20px;border-radius:20px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center;margin-bottom:20px}
+button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:
